@@ -1,0 +1,23 @@
+.image_modal {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image_modal_img {
+  max-width: 80vw;
+  max-height: 80vh;
+}
+
+.image_modal_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.image_modal_info {
+  padding-left: 10px;
+  font-weight: 500;
+}

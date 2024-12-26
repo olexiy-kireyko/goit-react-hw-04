@@ -1,0 +1,13 @@
+.loadmore_btn {
+  width: 160px;
+  background-color: #e4bfbf;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 2px 2px;
+  transition: all 400ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  margin-top: 20px;
+}
+
+.loadmore_btn:hover {
+  transform: scale(1.02, 1.02);
+}

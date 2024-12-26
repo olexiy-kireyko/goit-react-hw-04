@@ -1,0 +1,30 @@
+.header {
+  width: 100%;
+  background-color: rgb(148, 148, 223);
+  padding: 20px 10px;
+  z-index: -2;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.header_form {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.header_input {
+  background-color: #fff;
+  padding: 6px 30px 10px 50px;
+  border-radius: 8px;
+  min-width: 300px;
+  z-index: 0;
+}
+
+.header_btn {
+  margin-right: -30px;
+  z-index: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
