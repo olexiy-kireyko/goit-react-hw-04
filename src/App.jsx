@@ -46,9 +46,10 @@ function App() {
   };
 
   const handleSubmit = value => {
-    setSearchValue(value);
     setImages([]);
     setPage(1);
+    setMaxPage(0);
+    setSearchValue(value);
   };
 
   const onClickLoadMore = () => {
@@ -60,32 +61,40 @@ function App() {
   };
 
   const btnRef = useRef();
+  const galleryRef = useRef();
 
   useEffect(() => {
-    if (images.length > 0) {
+    if (images.length > 0 && maxPage > page) {
       btnRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (maxPage === page) {
+      galleryRef.current.scrollIntoView({
+        block: 'end',
+        inline: 'nearest',
+        behavior: 'smooth',
+      });
     }
-  }, [images]);
+  }, [images, maxPage, page]);
 
   useEffect(() => {
-    if (searchValue) {
-      async function getImage() {
-        try {
-          setIsOpenError(false);
-          setIsOpenLoader(true);
-          const response = await fetchImages(page, searchValue);
-          if (page === 1) {
-            setMaxPage(response.total_pages);
-          }
-          setImages(prev => [...prev, ...response.results]);
-        } catch (err) {
-          setIsOpenError(true);
-        } finally {
-          setIsOpenLoader(false);
-        }
-      }
-      getImage();
+    if (!searchValue) {
+      return;
     }
+    async function getImage() {
+      try {
+        setIsOpenError(false);
+        setIsOpenLoader(true);
+        const response = await fetchImages(page, searchValue);
+        if (page === 1) {
+          setMaxPage(response.total_pages);
+        }
+        setImages(prev => [...prev, ...response.results]);
+      } catch (error) {
+        setIsOpenError(error.message);
+      } finally {
+        setIsOpenLoader(false);
+      }
+    }
+    getImage();
   }, [searchValue, page]);
 
   return (
@@ -96,12 +105,13 @@ function App() {
           images={images}
           openModal={openModal}
           defineImageModalID={defineImageModalID}
+          ref={galleryRef}
         />
       ) : (
         isOpenError && <ErrorMessage />
       )}
       {isOpenLoader && <Loader />}
-      {images.length > 0 && maxPage > page && (
+      {maxPage > page && (
         <LoadMoreBtn ref={btnRef} onClickLoadMore={onClickLoadMore} />
       )}
 

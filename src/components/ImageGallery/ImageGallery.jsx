@@ -1,13 +1,16 @@
 import ImageCard from '../ImageCard/ImageCard';
 import s from './ImageGallery.module.css';
+import { forwardRef } from 'react';
 
-const ImageGallery = ({ images, openModal, defineImageModalID }) => {
+const ImageGallery = forwardRef(function ImageGallery(props, ref) {
+  const { images, openModal, defineImageModalID } = props;
+
   const handleClick = id => {
     defineImageModalID(id);
     openModal();
   };
   return (
-    <ul className={s.image_gallery}>
+    <ul ref={ref} className={s.image_gallery}>
       {images.map(image => {
         return (
           <li
@@ -21,5 +24,5 @@ const ImageGallery = ({ images, openModal, defineImageModalID }) => {
       })}
     </ul>
   );
-};
+});
 export default ImageGallery;

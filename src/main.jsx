@@ -6,7 +6,12 @@ import { Toaster } from 'react-hot-toast';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Toaster />
+    <Toaster
+      containerStyle={{
+        top: 80,
+        left: 2,
+      }}
+    />
     <App />
   </StrictMode>
 );
